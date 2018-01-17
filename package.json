@@ -1,0 +1,30 @@
+{
+  "name": "console-hangman",
+  "version": "1.0.0",
+  "description": "A console based hangman game.",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjdaurora/constructor-hangman.git"
+  },
+  "keywords": [
+    "javascript",
+    "constructor",
+    "hangman",
+    "game"
+  ],
+  "author": "JJ D'Aurora",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjdaurora/constructor-hangman/issues"
+  },
+  "homepage": "https://github.com/jjdaurora/constructor-hangman#readme",
+  "dependencies": {
+    "inquirer": "^5.0.0",
+    "is-letter": "^1.1.1",
+    "prompt": "^1.0.0"
+  }
+}
