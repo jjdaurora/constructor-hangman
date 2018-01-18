@@ -1,13 +1,15 @@
-var letter = require('./Letter');
+var Letter = require('./Letter');
 
-var Word = function(gameWord) {
-  this.word = gameWord; 
-  this.assignLetters = function () {
-      for (var i = 0; i < gameWord.length; i++) {
-        var letterObject = new Letter(this.word[i]); 
-        wordLetters.push(letterObject);
-      };
-    };
-};	
+
+var Word = function(gameWord, wordLetters) {
+    this.word = gameWord;
+    this.wordLetters = []; 
+    this.assignLetters = function (gameWord) {
+        for (var i = 0; i < this.word.length; i++) {
+        var newLetter = new Letter(this.word[i]);
+        this.wordLetters.push(newLetter);
+        };
+    }
+ };;	
 
 module.exports = Word;

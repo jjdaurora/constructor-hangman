@@ -3,4 +3,4 @@ var Letter = function(letter) {
   this.visible = false;
 };
 
-module.export = Letter;
+module.exports = Letter;

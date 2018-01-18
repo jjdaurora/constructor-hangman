@@ -1,26 +1,21 @@
 // initialize important game variables
 var Word = require('./Word');
 var inquirer = require("inquirer");
-var wordsList = ["REAGAN", "BUSH", "LINCOLN", "WASHINGTON", "JEFFERSON", "MONROE", "TRUMP"];
-var wordLetters = []; 
+var wordsList = ["reagan", "bush", "lincoln", "washington", "jefferson", "monroe", "trump"];
 var letterIsGuessed = false;
 var gameOver = false;
-var guessCount = 9;
-var assignWord = wordsList[Math.floor(Math.random() * wordsList.length)];
-var newWord = new Word(newWord);
- 
-function loopWrdOvrLtrs (newWord) {
-      for (var i = 0; i < gameWord.length; i++) {
-        var letterObject = new Letter(this.word[i]); 
-        wordLetters.push(letterObject);
-      };
-    };
+var guessCount = 9; 
+var assignWord = wordsList[Math.floor(Math.random() * wordsList.length)]; 
+var newWord = new Word(assignWord);
+var getLetters = newWord.assignLetters();
+
+console.log(getLetters);
 
 console.log("--------------------------");
 console.log("WELCOME TO HANGMAN PRESIDENTIAL STYLE")
 console.log("--------------------------");
     
-function startUp () {
+function startGame () {
 console.log("We've assigned you a new President to guess!")
     inquirer.prompt([
         {
@@ -39,17 +34,17 @@ console.log("We've assigned you a new President to guess!")
     ]).then(function(userEntry) {
      
 		var userEntry = userEntry.input;
-        var displayedWord = ''; 
+		var displayedWord = ""; 
         
-        for (i = 0; i < wordLetters.length; i++){
+        for (i = 0; i < newWord.wordLetters.length; i++){
 
-			if (userEntry == wordLetters[i].letter) {
-				wordLetters[i].isGuessed = true;
+			if (userEntry == newWord.wordLetters[i].letter) {
+				newWord.wordLetters[i].visible = true;
 				letterIsGuessed = true;
 			}
 
-			if (wordLetters[i].isGuessed === true) {
-			    displayedWord = displayedWord + wordLetters[i].letter;
+			if (newWord.wordLetters[i].visible === true) {
+			    displayedWord = displayedWord + newWord.wordLetters[i].letter;
 			    
 			}
 
@@ -75,26 +70,39 @@ console.log("We've assigned you a new President to guess!")
 	});		
 };
 
-function endGame (){
+function endGame () {
 			var correctLetters = 0;
 
-			for (i = 0; i < wordLetters.length; i++){ 
-				if (wordLetters[i].isGuessed == true){
+			for (i = 0; i < newWord.wordLetters.length; i++){ 
+				if (newWord.wordLetters[i].visible == true){
 					correctLetters++;
-					if (correctLetters === wordLetters.length){
+					if (correctLetters === newWord.wordLetters.length){
 						gameOver = true;
+						console.log("Wow! You know your presidents!");
+						makeNewWord();
+						startGame();
 					}
+	
 				}
 				
             };		
             		
 			if (guessCount === 0) {
 					gameOver = true;
+					guessCount = 9;
+					startGame();
+
 			}
 
 			else if (gameOver === false){
-				startUp();
+				startGame();
 			}
         };	
 
-startUp();
+function makeNewWord () {
+    assignWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+    newWord = new Word(assignWord);
+	getLetters = newWord.assignLetters();
+}
+
+startGame();
